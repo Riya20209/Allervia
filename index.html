@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Allervia - Allergy Detector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.12); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .nav-link {
+      background-color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #d6336c;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
+      background-color: #ffe6ea;
+    }
+
+    .nav-link:active {
+      animation: bounce 0.4s ease-in-out;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .feature-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .feature-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .feature-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+    }
+
+    .feature-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+      transform: skewX(-25deg);
+      transition: all 0.5s ease;
+    }
+
+    .feature-button:hover::before {
+      left: 100%;
+    }
+
+    .feature-button:hover {
+      box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.4);
+      border-color: #ffffff;
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section h2 {
+      text-align: center;
+      color: #d6336c;
+    }
+
+    .section p {
+      max-width: 600px;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 700px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Custom brand title styles */
+    .brand-title {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 3.5em;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff6ec4, #7873f5);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 8px rgba(255, 182, 193, 0.5);
+      animation: pulseGlow 3s infinite ease-in-out;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .brand-title:hover {
+      transform: scale(1.08) translateY(-3px);
+      text-shadow:
+        0 0 5px #ffb6c1,
+        0 0 10px #ff69b4,
+        0 0 15px #d6336c;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 2px 2px 8px rgba(255, 182, 193, 0.5);
+      }
+      50% {
+        text-shadow: 2px 2px 20px rgba(255, 182, 193, 1);
+      }
+    }
+  </style>
+</head>
+<body style="margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #fef6f9; color: #333;">
+
+  <!-- Header -->
+  <header style="text-align: center; padding: 20px 10px; background-color: #ffe6ea;">
+    <h1 class="brand-title">Allervia</h1>
+    <nav style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#allergen" class="nav-link">Allergen of the Week</a>
+      <a href="#emergency" class="nav-link">Emergency Tips</a>
+      <a href="#about" class="nav-link">About Allervia</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" style="text-align: center; padding: 60px 20px; background-color: #e0f7fa;">
+    <h2 style="font-size: 2em; color: #00796b;">Be ready, be informed, be Allervia</h2>
+    <p style="font-size: 1.2em; color: #00695c;">Take back your control with Allervia</p>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section" style="background-color: #fce4ec;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+      <div class="feature-card">
+        <h3 style="color: #ec407a;">Symptom Input</h3>
+        <p>Enter or upload symptoms to get medical advice and allergy info.</p>
+        <a href="allervia_bot_build/index.html?mode=symptoms" class="feature-button" style="background-color: #ec407a;">Start Checker</a>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #ab47bc;">Food/Product Checker</h3>
+        <p>Check reactions, warnings, and nutrition info for foods or items.</p>
+        <a href="allervia_bot_build/index.html?mode=food" class="feature-button" style="background-color: #ab47bc;">Check Now</a>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #29b6f6;">Allergy Risk Quiz</h3>
+        <p>Find your allergy risk based on your lifestyle and local climate.</p>
+        <a href="quiz.html" class="feature-button" style="background-color: #29b6f6;">Take Quiz</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Allergen of the Week -->
+  <section id="allergen" class="section" style="background-color: #e3f2fd;">
+    <h2>🦠 Allergen of the Week</h2>
+    <div class="card">
+      <h3 style="color: #1976d2;">Dust Mites</h3>
+      <p>Found in bedding, carpets, and soft furniture. Can cause sneezing, itchy eyes, and runny nose.</p>
+      <p><strong>Avoid:</strong> Unwashed linens, dusty areas. Use allergen-proof covers and air filters.</p>
+    </div>
+  </section>
+
+  <!-- Emergency Action Tips -->
+  <section id="emergency" class="section" style="background-color: #ffebee;">
+    <h2>🚨 Emergency Action Tips</h2>
+    <div class="card">
+      <ul>
+        <li>Use an EpiPen immediately if experiencing anaphylaxis.</li>
+        <li>Call emergency services — don’t wait it out.</li>
+        <li>Lie flat and raise legs while waiting for help.</li>
+        <li>Stay calm and alert others around you.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- About Allervia -->
+  <section id="about" class="section" style="background-color: #ede7f6;">
+    <h2>About Allervia</h2>
+    <p>Allervia is your intelligent allergy companion — helping you detect, understand, and manage allergies based on your symptoms, location, and lifestyle. Whether it's food, environment, or unknown triggers, we're here to keep you informed and safe.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 20px; background-color: #ffe6ea; font-size: 0.9em;">
+    <p>&copy; 2025 Allervia. All rights reserved.</p>
+    <p><a href="#" style="color: #d6336c; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #d6336c; text-decoration: none;">Contact</a></p>
+  </footer>
+</body>
+</html>

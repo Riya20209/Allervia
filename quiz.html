@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergy Risk Quiz - Allervia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #e0f7fa; /* Light blue, similar to a section in Allervia.html */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+        }
+        .quiz-container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 750px;
+            margin-top: 20px;
+        }
+        .quiz-container h1 {
+            color: #00796b; /* Dark teal */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .question-block:last-of-type { /* Target the last question block before results */
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .question-block p.question-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #004d40; /* Darker teal */
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            background-color: #f0f9ff;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #b3e5fc;
+        }
+        .options label:hover {
+            background-color: #dcf2ff;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        .options input[type="radio"] {
+            margin-right: 12px;
+            accent-color: #00796b;
+            transform: scale(1.1);
+        }
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #29b6f6; /* Blue from Allervia feature button */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 30px;
+        }
+        .submit-button:hover {
+            background-color: #039be5;
+            transform: translateY(-2px);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #00796b;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .results-section {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e8f5e9; /* Light green for results */
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+            text-align: center;
+        }
+        .results-section h2 {
+            color: #2e7d32; /* Darker green */
+            margin-bottom: 15px;
+        }
+        .results-section p {
+            font-size: 1.1em;
+            color: #388e3c; /* Medium green */
+        }
+        .error-message {
+            color: #c62828; /* Red for errors */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="Allervia.html" class="back-link">&larr; Back to Allervia Home</a>
+    <div class="quiz-container">
+        <h1>Allergy Risk Quiz</h1>
+        <form id="allergyQuizForm">
+            <div class="question-block">
+                <p class="question-text">1. Do you experience seasonal allergies (e.g., hay fever, watery eyes, sneezing during certain times of the year)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="yes" data-score="3"> Yes, frequently</label>
+                    <label><input type="radio" name="q1" value="sometimes" data-score="2"> Sometimes</label>
+                    <label><input type="radio" name="q1" value="no" data-score="0"> No, rarely or never</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">2. Do you have any known food allergies (e.g., nuts, dairy, shellfish)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="yes_diagnosed" data-score="4"> Yes, diagnosed food allergies.</label>
+                    <label><input type="radio" name="q2" value="yes_suspect" data-score="3"> Yes, I suspect some but not diagnosed.</label>
+                    <label><input type="radio" name="q2" value="no" data-score="0"> No known food allergies.</label>
+                    <label><input type="radio" name="q2" value="unsure" data-score="1"> Unsure.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">3. Do you have a family history of allergies (e.g., parents or siblings with asthma, eczema, or hay fever)?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="yes" data-score="3"> Yes, one or more close family members.</label>
+                    <label><input type="radio" name="q3" value="distant" data-score="1"> Yes, but only distant relatives.</label>
+                    <label><input type="radio" name="q3" value="no" data-score="0"> No known family history.</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">4. How often do you experience skin reactions like rashes, hives, or eczema?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="often" data-score="3"> Often (weekly or more)</label>
+                    <label><input type="radio" name="q4" value="sometimes" data-score="2"> Sometimes (monthly)</label>
+                    <label><input type="radio" name="q4" value="rarely" data-score="1"> Rarely (a few times a year)</label>
+                    <label><input type="radio" name="q4" value="never" data-score="0"> Never</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">5. Do you experience digestive issues (e.g., bloating, stomach pain, diarrhea) after eating certain foods?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="often" data-score="3"> Often with specific foods</label>
+                    <label><input type="radio" name="q5" value="sometimes" data-score="2"> Sometimes, but unsure of triggers</label>
+                    <label><input type="radio" name="q5" value="rarely" data-score="1"> Rarely</label>
+                    <label><input type="radio" name="q5" value="never" data-score="0"> Never</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p class="question-text">6. Have you ever experienced a severe allergic reaction (anaphylaxis) requiring emergency treatment?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="yes" data-score="5"> Yes</label>
+                    <label><input type="radio" name="q6" value="no" data-score="0"> No</label>
+                    <label><input type="radio" name="q6" value="unsure" data-score="1"> Unsure</label>
+                </div>
+            </div>
+
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <button type="submit" class="submit-button">See My Allergy Risk</button>
+        </form>
+
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <h2>Your Allergy Risk Assessment</h2>
+            <p id="scoreMessage"></p>
+            <p id="feedbackMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('allergyQuizForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6']; // Added q5 and q6
+            let totalScore = 0;
+            let allAnswered = true;
+
+            questions.forEach(questionName => {
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedOption) {
+                    totalScore += parseInt(selectedOption.getAttribute('data-score')) || 0;
+                } else {
+                    allAnswered = false;
+                }
+            });
+
+            const errorMessageDiv = document.getElementById('errorMessage');
+            if (!allAnswered) {
+                errorMessageDiv.textContent = 'Please answer all questions before submitting.';
+                errorMessageDiv.style.display = 'block';
+                document.getElementById('resultsSection').style.display = 'none';
+                return;
+            }
+            errorMessageDiv.style.display = 'none';
+
+            const resultsSection = document.getElementById('resultsSection');
+            const scoreMessage = document.getElementById('scoreMessage');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+
+            scoreMessage.textContent = `Your allergy risk score is: ${totalScore}.`;
+
+            // Adjusted score thresholds based on new max possible score (3+4+3+3+3+5 = 21)
+            if (totalScore >= 10) { // High risk
+                feedbackMessage.innerHTML = "Your responses suggest a <strong>higher potential for allergies</strong>. It's advisable to <strong>consult with a healthcare professional or allergist</strong> for a comprehensive evaluation. They can provide accurate diagnosis and management strategies. <br>You can also use our <a href='allervia_bot_build/index.html?mode=symptoms' style='color: #00796b; font-weight: bold;'>Allervia Symptom Checker</a> to explore your symptoms further.";
+            } else if (totalScore >= 5) { // Moderate risk
+                feedbackMessage.innerHTML = "Your responses indicate a <strong>moderate potential for allergies</strong>. Pay attention to any recurring symptoms and consider discussing them with a doctor if they persist or worsen. Identifying specific triggers can be helpful. <br>Feel free to use our <a href='allervia_bot_build/index.html?mode=symptoms' style='color: #00796b; font-weight: bold;'>Allervia Symptom Checker</a> to explore your symptoms.";
+            } else {
+                feedbackMessage.innerHTML = "Your responses suggest a <strong>lower potential for allergies</strong>. You are most probably okay. However, always be mindful of new or unusual symptoms and consult a doctor if you have concerns. Maintaining a healthy lifestyle is always beneficial.";
+            }
+
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+
+</code>
